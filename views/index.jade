@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  h1= title
+  div.addCommentForm
+        form( method="post", action="/create")
+            div
+                div
+                    span.label Name :
+                    input(type="text", class="nameTxt", name="username")
+
+                br
+
+                div
+                    span.label Location :
+                    select(id="location", name="location")
+                      option(value='') -- select location --
+                      each country in countries
+                        option(value = country.alpha3) #{country.name}
+
+                br
+
+                div#addUserSubmit
+                    input(type="submit", value="Save")
+  br
+  br
+  table(border='1')
+    thead
+        tr
+            th No
+            th User Name
+            th Location
+    tbody
+        each user, i in users
+            tr
+                td= i+1
+                td= user.username
+                td= countries[user.location].name 
